@@ -84,6 +84,23 @@ services:
     depends_on:
       - elasticsearch
 
+  packetbeat:
+    image: docker.elastic.co/beats/packetbeat:${ELASTIC_VERSION}
+    hostname: "{{.Node.Hostname}}-packetbeat"
+    user: root
+    networks:
+      - elk
+    volumes:
+      - C:\Users\dev\Desktop\clones\my-docker-elk\packetbeat\packetbeat.yml:/usr/share/packetbeat/packetbeat.yml:ro
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    command: ["--strict.perms=false"]
+    depends_on:
+      - elasticsearch
+      - kibana
+
+
 networks:
   elk:
     driver: bridge
