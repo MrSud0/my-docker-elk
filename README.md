@@ -43,33 +43,37 @@ own_. [sherifabdlnaby/elastdocker][elastdocker] is one example among others of p
 
 ## Contents
 
-1. [Requirements](#requirements)
-   * [Host setup](#host-setup)
-   * [Docker Desktop](#docker-desktop)
-     * [Windows](#windows)
-     * [macOS](#macos)
-1. [Usage](#usage)
-   * [Bringing up the stack](#bringing-up-the-stack)
-   * [Initial setup](#initial-setup)
-     * [Setting up user authentication](#setting-up-user-authentication)
-     * [Injecting data](#injecting-data)
-   * [Cleanup](#cleanup)
-   * [Version selection](#version-selection)
-1. [Configuration](#configuration)
-   * [How to configure Elasticsearch](#how-to-configure-elasticsearch)
-   * [How to configure Kibana](#how-to-configure-kibana)
-   * [How to configure Logstash](#how-to-configure-logstash)
-   * [How to disable paid features](#how-to-disable-paid-features)
-   * [How to scale out the Elasticsearch cluster](#how-to-scale-out-the-elasticsearch-cluster)
-   * [How to reset a password programmatically](#how-to-reset-a-password-programmatically)
-1. [Extensibility](#extensibility)
-   * [How to add plugins](#how-to-add-plugins)
-   * [How to enable the provided extensions](#how-to-enable-the-provided-extensions)
-1. [JVM tuning](#jvm-tuning)
-   * [How to specify the amount of memory used by a service](#how-to-specify-the-amount-of-memory-used-by-a-service)
-   * [How to enable a remote JMX connection to a service](#how-to-enable-a-remote-jmx-connection-to-a-service)
-1. [Going further](#going-further)
-   * [Plugins and integrations](#plugins-and-integrations)
+- [Elastic stack (ELK) on Docker](#elastic-stack-elk-on-docker)
+  - [Philosophy](#philosophy)
+  - [Contents](#contents)
+  - [Requirements](#requirements)
+    - [Host setup](#host-setup)
+    - [Docker Desktop](#docker-desktop)
+      - [Windows](#windows)
+      - [macOS](#macos)
+  - [Usage](#usage)
+    - [Bringing up the stack](#bringing-up-the-stack)
+    - [Initial setup](#initial-setup)
+      - [Setting up user authentication](#setting-up-user-authentication)
+      - [Injecting data](#injecting-data)
+    - [Cleanup](#cleanup)
+    - [Version selection](#version-selection)
+  - [Configuration](#configuration)
+    - [How to configure Elasticsearch](#how-to-configure-elasticsearch)
+    - [How to configure Kibana](#how-to-configure-kibana)
+    - [How to configure Logstash](#how-to-configure-logstash)
+    - [How to disable paid features](#how-to-disable-paid-features)
+    - [How to scale out the Elasticsearch cluster](#how-to-scale-out-the-elasticsearch-cluster)
+    - [How to reset a password programmatically](#how-to-reset-a-password-programmatically)
+  - [Extensibility](#extensibility)
+    - [How to add plugins](#how-to-add-plugins)
+    - [How to enable the provided extensions](#how-to-enable-the-provided-extensions)
+  - [JVM tuning](#jvm-tuning)
+    - [How to specify the amount of memory used by a service](#how-to-specify-the-amount-of-memory-used-by-a-service)
+    - [How to enable a remote JMX connection to a service](#how-to-enable-a-remote-jmx-connection-to-a-service)
+  - [Going further](#going-further)
+    - [Plugins and integrations](#plugins-and-integrations)
+- [Packetbeat config](#packetbeat-config)
 
 ## Requirements
 
@@ -436,3 +440,10 @@ See the following Wiki pages:
 [ls-docker]: https://www.elastic.co/guide/en/logstash/current/docker-config.html
 
 [upgrade]: https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html
+
+
+
+# Packetbeat config
+
+docker run -d --name=packetbeat --user=packetbeat --volume="C:\Users\dev\Desktop\clones\my-docker-elk\packetbeat\packetbeat.yml:/usr/share/packetbeat/packetbeat.yml:ro" --cap-add="NET_RAW" --cap-add="NET_ADMIN" --network=host docker.elastic.co/beats/packetbeat:8.1.3 --strict.perms=false -e -E output.elasticsearch.hosts=["http://localhost:9200"]
+  
