@@ -11,7 +11,7 @@
 
 # Select the network interface to sniff the data. On Linux, you can use the
 # "any" keyword to sniff on all connected interfaces.
-packetbeat.interfaces.device: 1
+packetbeat.interfaces.device: any
 #   1          75  4294967295  connected     Loopback Pseudo-Interface 1
 #  23          25        1500  disconnected  Wi-Fi
 #   6          35        1500  connected     Ethernet
@@ -200,7 +200,7 @@ setup.kibana:
 # ---------------------------- Elasticsearch Output ----------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
+  hosts: ["elasticsearch:9200"]
 
   # Protocol - either `http` (default) or `https`.
   protocol: "http"

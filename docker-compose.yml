@@ -86,7 +86,7 @@ services:
 
   packetbeat:
     image: docker.elastic.co/beats/packetbeat:${ELASTIC_VERSION}
-    hostname: "{{.Node.Hostname}}-packetbeat"
+    #hostname: "{{.Node.Hostname}}-packetbeat"
     user: root
     networks:
       - elk
@@ -99,12 +99,16 @@ services:
     depends_on:
       - elasticsearch
       - kibana
+    network_mode: host
 
 
 networks:
   elk:
     driver: bridge
+   # external: true
+    #name: host
 
 volumes:
   setup:
   elasticsearch:
+  packetbeat:
