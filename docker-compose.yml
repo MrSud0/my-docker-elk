@@ -110,7 +110,7 @@ networks:
   elk:
     driver: bridge
    # external: true
-    name: host
+  # name: host
 
 volumes:
   setup:
